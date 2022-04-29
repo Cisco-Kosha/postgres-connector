@@ -8,14 +8,12 @@ from app.db.core import Database
 
 Base = declarative_base()
 
+
 engine = create_engine(settings.SQLALCHEMY_DATABASE_URI, pool_pre_ping=True)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=True, bind=engine)
 
 Inspector = inspect(engine)
-
 db = Database(settings.SQLALCHEMY_DATABASE_URI)
-
 inspector = Inspector.from_engine(engine)
-
 print(db.get_schema_names(inspector=inspector))

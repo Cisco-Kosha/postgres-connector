@@ -44,6 +44,8 @@ class Database(object):
     def __init__(self, sqlalchemy_uri):
         self.sqlalchemy_uri = sqlalchemy_uri
 
+
+
     @property
     def sqlalchemy_uri_decrypted(self) -> str:
         try:

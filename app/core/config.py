@@ -8,7 +8,7 @@ from pydantic import AnyHttpUrl, BaseSettings, EmailStr, HttpUrl, PostgresDsn, v
 class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     SECRET_KEY: str = secrets.token_urlsafe(32)
-    PROJECT_NAME: str = "kosha"
+    PROJECT_NAME: str = "postgres-connector"
     # 60 minutes * 24 hours * 8 days = 8 days
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
 
@@ -29,23 +29,19 @@ class Settings(BaseSettings):
     DB_USER: str
     DB_PASSWORD: str
     DB_NAME: str
-    DATABASE: str
     SQLALCHEMY_DATABASE_URI: str = None
 
     @validator("SQLALCHEMY_DATABASE_URI", pre=True)
     def assemble_db_connection(cls, v: Optional[str], values: Dict[str, Any]) -> Any:
         if isinstance(v, str):
             return v
-        elif os.environ["DATABASE"] == 'postgres' or os.environ["DATABASE"] == 'postgresql':
-            return PostgresDsn.build(
-                scheme=os.environ["DATABASE"],
-                user=os.environ["DB_USER"],
-                password=os.environ["DB_PASSWORD"],
-                host=os.environ["DB_SERVER"],
-                path=f'/{os.environ["DB_NAME"] or ""}',
-            )
-        else:
-            return "Invalid database"
+        return PostgresDsn.build(
+            scheme="postgres",
+            user=os.environ["DB_USER"],
+            password=os.environ["DB_PASSWORD"],
+            host=os.environ["DB_SERVER"],
+            path=f'/{os.environ["DB_NAME"] or ""}',
+        )
 
     class Config:
         case_sensitive = True
