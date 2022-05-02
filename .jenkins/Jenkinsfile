@@ -2,7 +2,7 @@
 
 def pipelinesettings = [
   deploy: [
-    [name: "postgres-connector" ]        // Containers to publish
+    [name: "kosha/postgres-connector" ]        // Containers to publish
   ],
 
   tagversion: "${env.BUILD_ID}",    // Docker tag version
@@ -17,6 +17,7 @@ def pipelinesettings = [
   useMultipleHelm:1,                // Publish Multiple Charts
   chartMuseum: 1,                   // Publish Helm chart to ChartMuseum
   customContainersProject: "kosha",
+  customContainersCreds: "kosha_botuser_containers_cisco_com",
 ]
 
 srePipeline( pipelinesettings )
