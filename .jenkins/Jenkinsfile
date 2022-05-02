@@ -12,7 +12,7 @@ def pipelinesettings = [
   publishContainer: 1,              // Publish container
   ciscoContainer: 1,                // Publish container to containers.cisco.com
   ecr: 1,                           // Publish container to Private ECR
-  gitDefaultBranch: "master",         // Default Git Branch
+  gitDefaultBranch: "main",         // Default Git Branch
   publishHelm: 1,                   // HELM CREATE
   useMultipleHelm:1,                // Publish Multiple Charts
   chartMuseum: 1,                   // Publish Helm chart to ChartMuseum
