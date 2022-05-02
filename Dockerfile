@@ -1,18 +1,18 @@
-FROM python:3.9-slim
+FROM python:3.9.5-slim
+
+RUN apt-get update \
+    && apt-get -y install libpq-dev gcc \
+    && pip install psycopg2
 
 RUN pip install pipenv
 
-COPY Pipfile* /tmp
+COPY Pipfile .
+COPY Pipfile.lock .
 
-RUN cd /tmp && pipenv lock --keep-outdated --requirements > requirements.txt
-
-RUN pip install -r /tmp/requirements.txt
-
+RUN pipenv install --system --deploy --ignore-pipfile
 
 COPY ./app /app
 COPY main.py /
-
-RUN pip install -r /tmp/requirements.txt
 
 EXPOSE 8001
 
