@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: {{ .Values.appName }}
-        image: docker.io/{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag }}
+        image: {{ .Values.image.org }}/{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag }}
         resources:
           requests:
             cpu: "100m"

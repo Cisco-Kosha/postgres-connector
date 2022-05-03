@@ -7,9 +7,10 @@ appVersion: v1
 replicaCount: 1
 
 image:
-  repository: 91pavan
+  org: containers.cisco.com
+  repository: kosha
   tag: latest
-  name: kosha-sql-connector
+  name: sql-connector
   pullPolicy: IfNotPresent
 
 service:
