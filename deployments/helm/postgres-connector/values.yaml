@@ -14,7 +14,7 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  name: sql-connector
+  name: postgres-connector
   port: 8001
 
 connector:
