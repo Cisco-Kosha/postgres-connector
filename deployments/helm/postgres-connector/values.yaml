@@ -10,7 +10,7 @@ image:
   org: containers.cisco.com
   repository: kosha
   tag: latest
-  name: sql-connector
+  name: postgres-connector
   pullPolicy: IfNotPresent
 
 service:
