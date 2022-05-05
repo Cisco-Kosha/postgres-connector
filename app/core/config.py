@@ -25,10 +25,7 @@ class Settings(BaseSettings):
             return v
         raise ValueError(v)
 
-    DB_SERVER: str
-    DB_USER: str
-    DB_PASSWORD: str
-    DB_NAME: str
+
     SQLALCHEMY_DATABASE_URI: str = None
 
     @validator("SQLALCHEMY_DATABASE_URI", pre=True)
@@ -37,10 +34,10 @@ class Settings(BaseSettings):
             return v
         return PostgresDsn.build(
             scheme="postgres",
-            user=os.environ["DB_USER"],
-            password=os.environ["DB_PASSWORD"],
-            host=os.environ["DB_SERVER"],
-            path=f'/{os.environ["DB_NAME"] or ""}',
+            user=os.getenv('DB_USER', 'postgres'),
+            password=os.getenv('DB_PASSWORD', 'test'),
+            host=os.getenv('DB_SERVER', 'localhost'),
+            path=f'/{os.getenv("DB_NAME", "test")}',
         )
 
     class Config:
