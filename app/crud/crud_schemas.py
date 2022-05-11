@@ -1,17 +1,12 @@
 from typing import List, Any
 
-from fastapi.encoders import jsonable_encoder
-from sqlalchemy.orm import Session
+from app.db.session import get_sqlalchemy_db, get_inspector, get_sqlalchemy_engine
 
-from app.api.api_v1.deps import get_inspector
-from app.crud.base import CRUDBase
-
-from app.db.session import db, inspector
+db = get_sqlalchemy_db()
+inspector = get_inspector(engine=get_sqlalchemy_engine())
 
 
 class CRUDSchemas:
-
-    inspector = get_inspector()
 
     def get_schemas(self) -> List[Any]:
         return db.get_all_schema_names(inspector=inspector)

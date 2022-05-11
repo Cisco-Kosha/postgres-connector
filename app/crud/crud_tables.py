@@ -1,10 +1,8 @@
-from typing import List, Any, Dict
-
-from app.db.metadata import table_metadata
-from app.db.session import settings, Database, db, inspector
-from app.schemas.table import Table
+from app.db.session import *
 
 from app.utils.core import *
+
+db = get_sqlalchemy_db()
 
 
 class CRUDTables:

@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Any
 from sqlalchemy import create_engine, Table
 
 from app.db.base_class import Base
-from ..core.config import settings
+from ..core.config import *
 
 from app.db.metadata import table_metadata
 
@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from .user import User  # noqa: F401
 
 engine = create_engine(settings.SQLALCHEMY_DATABASE_URI, pool_pre_ping=True)
+
 
 def get_table_object():
     class TableModel(Base):
