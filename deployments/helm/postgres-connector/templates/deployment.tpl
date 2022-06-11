@@ -19,6 +19,10 @@ spec:
       labels:
         app:  {{ .Values.appName }}
         version: {{ .Values.appVersion }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "{{ .Values.service.port }}"
     spec:
       containers:
       - name: {{ .Values.appName }}

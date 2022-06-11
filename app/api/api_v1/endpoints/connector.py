@@ -14,7 +14,7 @@ from app.db.core import Database
 router = APIRouter()
 
 
-@router.get("/", response_model=Any)
+@router.get("/list", response_model=Any)
 def get_connector_spec():
     return JSONResponse({"DB_USER": "Database username", "DB_PASSWORD": "Database password",
                          "DB_SERVER": "Database Host", "DB_NAME": "Database name"})

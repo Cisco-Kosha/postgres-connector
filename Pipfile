@@ -16,6 +16,8 @@ pydantic = "~=1.4"
 email-validator = "*"
 sqlsoup = "*"
 urllib3 = ">=1.26.5"
+prometheus_fastapi_instrumentator = "~=5.8.1"
+
 
 [dev-packages]
 

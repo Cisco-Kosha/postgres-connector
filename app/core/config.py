@@ -1,8 +1,12 @@
 import os
 import secrets
+from logging.config import dictConfig
 from typing import Any, Dict, List, Optional, Union
 
 from pydantic import AnyHttpUrl, BaseSettings, EmailStr, HttpUrl, PostgresDsn, validator
+from app.utils.logging import LogConfig
+import logging
+
 
 
 class Settings(BaseSettings):
@@ -49,3 +53,6 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+dictConfig(LogConfig().dict())
+logger = logging.getLogger(settings.PROJECT_NAME)
