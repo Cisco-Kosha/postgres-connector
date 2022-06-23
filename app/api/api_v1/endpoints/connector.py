@@ -20,8 +20,8 @@ def get_connector_spec():
                          "DB_SERVER": "Database Host", "DB_NAME": "Database name"})
 
 
-@router.post("/check", response_model=Any)
-async def check_connector_spec(request: Request):
+@router.post("/test", response_model=Any)
+async def test_connector_spec(request: Request):
     data = await request.json()
     if data is not None:
         db_url = PostgresDsn.build(
