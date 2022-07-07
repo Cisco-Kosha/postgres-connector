@@ -11,7 +11,7 @@ from app.api.api_v1 import deps
 router = APIRouter()
 
 
-@router.get("/", response_model=List[Any])
+@router.get("/list", response_model=List[Any])
 def get_schemas():
     logger.info("Getting all schemas for table")
     schemas = crud_schemas.schema.get_schemas()
