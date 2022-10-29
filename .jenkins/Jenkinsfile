@@ -1,0 +1,23 @@
+@Library(['srePipeline']) _
+
+def pipelinesettings = [
+  deploy: [
+    [name: "kosha/postgres-connector" ]        // Containers to publish
+  ],
+
+  tagversion: "${env.BUILD_ID}",    // Docker tag version
+  chart: "deployments/helm",        // Location of helm chart
+  prepare: 1,                       // GIT Clone
+  build: 1,                         // Build container
+  publishContainer: 1,              // Publish container
+  ciscoContainer: 1,                // Publish container to containers.cisco.com
+  ecr: 1,                           // Publish container to Private ECR
+  gitDefaultBranch: "main",         // Default Git Branch
+  publishHelm: 1,                   // HELM CREATE
+  useMultipleHelm:1,                // Publish Multiple Charts
+  chartMuseum: 1,                   // Publish Helm chart to ChartMuseum
+  customContainersProject: "kosha",
+  customContainersCreds: "kosha_botuser_containers_cisco_com",
+]
+
+srePipeline( pipelinesettings )
