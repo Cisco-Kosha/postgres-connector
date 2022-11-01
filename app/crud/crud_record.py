@@ -2,7 +2,7 @@ from typing import List, Any
 
 import sqlalchemy
 from fastapi.encoders import jsonable_encoder
-from sqlalchemy.exc import ResourceClosedError
+from sqlalchemy.exc import ResourceClosedError, SQLAlchemyError
 from sqlalchemy.orm import Session
 from starlette.requests import Request
 
@@ -59,11 +59,13 @@ class CRUDRecord(CRUDBase[Record, Any, None]):
 def run_sql_cmd(session: Session, sql_str: RawSQL) -> Any:
     try:
         rs = session.execute(sql_str.raw_sql)
-        try:
-            result = [dict(row) for row in rs]
-        except ResourceClosedError:
-            session.commit()
-            return 'OK'
+        session.commit()
+        result = [dict(row) for row in rs]
         return result
+    except SQLAlchemyError:
+        session.rollback()
+        session.flush()
+        session.close()
+        return 'OK'
     except Exception as e:
         raise Exception(e)

@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request, Body
 from sqlalchemy.orm import Session
 
 from app.core.config import logger
-from app.crud.crud_record import CRUDRecord
+from app.crud.crud_record import CRUDRecord, run_sql_cmd
 from app.db.metadata import table_metadata
 from app.models.record import get_table_object
 from app.schemas.record import CreateRowFunc, RawSQL
@@ -81,20 +81,15 @@ def create_record(table: str,
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.post("/{table}/query", response_model=Any)
+@router.post("/query/raw/sql", response_model=Any)
 def run_sql_command(
-        table: str,
         sql: RawSQL,
         session: Session = Depends(deps.get_db)) -> Any:
     """
     Run raw sql command.
     """
-    if table is None:
-        raise HTTPException(status_code=409, detail="Table not set")
-    logger.info("Getting all records for table %s with raw sql command %s", table, sql)
-    table_metadata.set_table(table)
     try:
-        resp = crud.crud_record.run_sql_cmd(session=session, sql_str=sql)
+        resp = run_sql_cmd(session=session, sql_str=sql)
         return resp
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

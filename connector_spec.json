@@ -1,6 +1,49 @@
 {
-  "DB_USER": "Database username",
-  "DB_PASSWORD": "Database password",
-  "DB_SERVER": "Database Host",
-  "DB_NAME": "Database name"
+  "version": "2.0.0",
+  "fields": [
+    {
+      "field": "DB_USER",
+      "displayName": "PostgreSQL DB Username",
+      "type": "String",
+      "minLength": 3,
+      "maxLength": 40,
+      "required": true,
+      "description": "PostgreSQL Server Username",
+      "example": "username",
+      "helpSection": "PostgreSQL DB username"
+    },
+    {
+      "field": "DB_PASSWORD",
+      "displayName": "PostgreSQL DB Password",
+      "type": "Password",
+      "minLength": 10,
+      "maxLength": 60,
+      "required": true,
+      "description": "PostgreSQL DB Passowrd",
+      "example": "my-secret-password",
+      "helpSection": "PostgreSQL DB Password"
+    },
+    {
+      "field": "DB_SERVER",
+      "displayName": "PostgreSQL DB Host",
+      "type": "String",
+      "minLength": 10,
+      "maxLength": 60,
+      "required": true,
+      "description": "PostgreSQL Server Host URL",
+      "example": "https://my-pg-db-url.com",
+      "helpSection": "PostgreSQL Host URL"
+    },
+    {
+      "field": "DB_NAME",
+      "displayName": "PostgreSQL Server Port",
+      "type": "String",
+      "minLength": 10,
+      "maxLength": 60,
+      "required": true,
+      "description": "PostgreSQL Server Port",
+      "example": "postgres",
+      "helpSection": "PostgreSQL Server port number"
+    }
+  ]
 }
