@@ -19,7 +19,7 @@
       "minLength": 10,
       "maxLength": 60,
       "required": true,
-      "description": "PostgreSQL DB Passowrd",
+      "description": "PostgreSQL DB Password",
       "example": "my-secret-password",
       "helpSection": "PostgreSQL DB Password"
     },
@@ -31,19 +31,19 @@
       "maxLength": 60,
       "required": true,
       "description": "PostgreSQL Server Host URL",
-      "example": "https://my-pg-db-url.com",
+      "example": "my-pg-db-url.com",
       "helpSection": "PostgreSQL Host URL"
     },
     {
       "field": "DB_NAME",
-      "displayName": "PostgreSQL Server Port",
+      "displayName": "PostgreSQL DB Name",
       "type": "String",
       "minLength": 10,
       "maxLength": 60,
       "required": true,
-      "description": "PostgreSQL Server Port",
+      "description": "PostgreSQL DB Name",
       "example": "postgres",
-      "helpSection": "PostgreSQL Server port number"
+      "helpSection": "PostgreSQL DB name"
     }
   ]
 }
