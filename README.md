@@ -1,68 +1,45 @@
-# PostgreSQL Connector
+# Kosha PostgreSQL Connector
 
+PostgreSQL is an open-source, relational database that enable you to efficiently store, retrieve, and manipulate data for your applications. PostgreSQL supports a wide range of data types, advanced querying capabilities, and features such as transactions and concurrency control, making it suitable for complex applications. 
 
-Postgres connector is a standalone web server that turns your PostgreSQL database directly into a RESTful API. The structural constraints and permissions in the database determine the API endpoints and operations.
+The Kosha PostgreSQL connecter enables you to perform REST API operations from the PostgreSQL API in your Kosha workflow or custom application. Using the Kosha PostgreSQL connecter, you can directly access PostgreSQL to:
 
-![Postgres](images/postgresql.png)
+* Manage table records
+* Get table metadata and schemas
+* Manage stored procedures
 
-## Motivation
+## Useful Actions
 
-Using this connector is an alternative to manual CRUD programming. Custom API servers suffer problems. Writing business logic often duplicates, ignores or hobbles database structure. The connector philosophy establishes a single declarative source of truth: the data itself.
+You can use the Kosha PostgreSQL connector to perform a variety of functions related to managing database tables.
 
-## Security
-The connector handles authentication (via JSON Web Tokens) and delegates authorization to the role information defined in the database. This ensures there is a single declarative source of truth for security. When dealing with the database the server assumes the identity of the currently authenticated user, and for the duration of the connection cannot do anything the user themselves couldn't. Other forms of authentication can be built on top of the JWT primitive. See the docs for more information.
+Refer to the Kosha PostgreSQL connector [API specification](openapi.json) for details.
 
-## Versioning
-A robust long-lived API needs the freedom to exist in multiple versions. PG connector does versioning through database schemas. This allows you to expose tables and views without making the app brittle. Underlying tables can be superseded and hidden behind public facing views.
+### Table records
 
-## Self-documentation
-PG connector uses the OpenAPI standard to generate up-to-date documentation for APIs. You can use a tool like Swagger-UI to render interactive documentation for demo requests against the live API server.
+A table record is a single row of data within a table. Use the PostgreSQL connector to:
 
-## Development
-### Build
+* Create, delete, and read records
+* Read records by query params
 
-Install Python 3.7 (or later) on your machine.
+### Table metadata
 
-Install pipenv
+Table metadata describes tables in the database and includes details such as the table name, column names, and data types of the columns. Use the Kosha PostgreSQL connector to retrieve metadata for tables and table columns.
 
-```bash
-pip install pipenv
-```
+### Database schemas
 
-To start the virtualenv of the project, run
-```
-    pipenv shell
-```
+A database schema organizes database objects such as tables, views, indexes, procedures, and other related entities. Use the PostgreSQL connector to get schemas for a database.
 
-To install dependencies, run
-```
-    pipenv install
-```
+### Stored procedures
 
-### Running locally
+Stored procedures enable you to group related database operations, improve performance, ensure data consistency, and promote code reusability and security in your applications. Use the PostgreSQL connector to:
 
-To run the project, simply provide env variables to point the app to a DB backend, currently works with PostgreSQL and Mysql backends
+* Create, get, and delete user-defined functions
+* Execute RPC functions
 
+## Authentication
 
-```bash
-DATABASE=postgresql DB_USER=postgres DB_PASSWORD=<password> DB_SERVER=localhost DB_NAME=postgres uvicorn main:app --reload --workers 1 --host 0.0.0.0 --port 8001
-```
+To authenticate when provisioning the Kosha PostgreSQL connector, you need your:
 
-
-This will start a worker and expose the API on port `8001` on the host machine.
-
-
-### Running locally via docker
-
-To start a postgresql or mysql database locally using docker, run either of the following commands:
-
-```bash
-docker run -d \
-	--name postgres-connector \
-	-e POSTGRES_PASSWORD=<PW> \
-	-v ${HOME}/postgres-data/:/var/lib/postgresql/data \
-        -p 5432:5432 \
-        postgres
-
-
-```
+* PostgreSQL database username and password
+* PostgreSQL database host
+* PostgreSQL database name
