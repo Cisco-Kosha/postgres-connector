@@ -2,7 +2,7 @@
 
 PostgreSQL is an open-source, relational database that enable you to efficiently store, retrieve, and manipulate data for your applications. PostgreSQL supports a wide range of data types, advanced querying capabilities, and features such as transactions and concurrency control, making it suitable for complex applications. 
 
-The Kosha PostgreSQL connecter enables you to perform REST API operations from the PostgreSQL API in your Kosha workflow or custom application. Using the Kosha PostgreSQL connecter, you can directly access PostgreSQL to:
+The Kosha PostgreSQL connector enables you to perform REST API operations from the PostgreSQL API in your Kosha workflow or custom application. Using the Kosha PostgreSQL connector, you can directly access PostgreSQL to:
 
 * Manage table records
 * Get table metadata and schemas
